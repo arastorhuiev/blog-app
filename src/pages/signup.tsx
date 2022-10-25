@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { Box, TextField, Button } from '@mui/material';
+import { TextField, Button, Stack, Typography } from '@mui/material';
 
 type IUserData = {
   email: string;
@@ -17,13 +17,14 @@ export function SignUp() {
       auth,
       userData.email,
       userData.password,
-    ).then(( user ) => {
+    ).then((user) => {
       console.log(user);
     });
   }
 
   return (
-    <Box sx={{ maxWidth: '450px', display: 'flex', flexDirection: 'column', gap: 1 }}>
+    <Stack>
+      <Typography>SIGN UP</Typography>
       <TextField
         required
         label='email'
@@ -38,9 +39,11 @@ export function SignUp() {
       />
       <Button
         variant='contained'
-        onClick={() => handleCreateUser({ email: userEmail, password: userPassword })}>
+        onClick={() =>
+          handleCreateUser({ email: userEmail, password: userPassword })
+        }>
         Login
       </Button>
-    </Box>
+    </Stack>
   );
 }
