@@ -3,11 +3,11 @@ import { Link, NavLink } from 'react-router-dom';
 
 const OpenMenu = () => {
   return (
-    <>
+    <div className='space-y-2'>
       <div className='w-7 h-px bg-white'></div>
       <div className='w-7 h-px bg-white'></div>
       <div className='w-7 h-px bg-white'></div>
-    </>
+    </div>
   );
 };
 
@@ -38,7 +38,7 @@ export const Header = () => {
           className='text-white text-lg font-semibold hover:underline hover:underline-offset-8 decoration-2'>
           Personal Blog
         </Link>
-        <ul className='hidden md:flex space-x-6 text-white text-lg font-semibold decoration-4'>
+        <ul className='hidden sm:flex space-x-6 text-white text-lg font-semibold decoration-4'>
           <li className='hover:underline hover:underline-offset-8'>
             <NavLink to='/all'>All</NavLink>
           </li>
@@ -52,7 +52,7 @@ export const Header = () => {
             <NavLink to='/tech'>Technology</NavLink>
           </li>
         </ul>
-        <div onClick={() => setOpenNav(!openNav)} className='space-y-2 hover:cursor-pointer'>
+        <div onClick={() => setOpenNav(!openNav)} className='sm:hidden hover:cursor-pointer'>
           {openNav ? <CloseMenu /> : <OpenMenu />}
         </div>
       </nav>
