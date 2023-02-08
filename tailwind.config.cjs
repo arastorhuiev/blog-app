@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        blog: {
+        main: {
           dark: '#2B2B2B',
         },
       },

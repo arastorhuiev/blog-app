@@ -1,74 +1,61 @@
 import { useState } from 'react';
-import clsx from 'clsx';
+import { Link, NavLink } from 'react-router-dom';
 
-type MobileMenuProps = {
-  handler: () => void;
-  hasOpen: boolean;
+const OpenMenu = () => {
+  return (
+    <>
+      <div className='w-7 h-px bg-white'></div>
+      <div className='w-7 h-px bg-white'></div>
+      <div className='w-7 h-px bg-white'></div>
+    </>
+  );
 };
 
-const MobileMenu = ({ handler, hasOpen }: MobileMenuProps) => {
-  const MobileMenuStyle = (hasOpen: boolean) =>
-    clsx('h-12 border-t-2 border-white sm:hidden bg-blog-dark py-2', {
-      hidden: !hasOpen,
-      block: hasOpen,
-    });
-
+const CloseMenu = () => {
   return (
-    <div onClick={handler} className={MobileMenuStyle(hasOpen)}>
-      <ul className='flex flex-row justify-center justify-items-center text-white ml-'>
-        <li className='text-lg font-semibold mr-6 hover:underline hover:underline-offset-8 decoration-4'>
-          All
-        </li>
-        <li className='text-lg font-semibold mr-6 hover:underline hover:underline-offset-8 decoration-4'>
-          Culture
-        </li>
-        <li className='text-lg font-semibold mr-6 hover:underline hover:underline-offset-8 decoration-4'>
-          Ideas
-        </li>
-        <li className='text-lg font-semibold hover:underline hover:underline-offset-8 decoration-4'>
-          Technology
-        </li>
-      </ul>
-    </div>
+    <svg
+      className='h-7 w-7 text-white'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'>
+      <line x1='18' y1='6' x2='6' y2='18' />
+      <line x1='6' y1='6' x2='18' y2='18' />
+    </svg>
   );
 };
 
 export const Header = () => {
-  const [openMenu, setOpenMenu] = useState(false);
-
-  const handleMenu = () => {
-    setOpenMenu(!openMenu);
-  };
+  const [openNav, setOpenNav] = useState(false);
 
   return (
-    <header className='bg-blog-dark h-20'>
-      <nav className=' flex justify-between items-center px-6 py-6'>
-        <div className='sm:flex sm:justify-between sm:w-4/12'>
-          <span className='text-lg font-semibold text-white mr-6 hover:underline hover:underline-offset-8 decoration-4'>
-            Blog
-          </span>
-          <ul className='hidden sm:flex flex-row justify-between text-white ml-'>
-            <li className='text-lg font-semibold mr-6 hover:underline hover:underline-offset-8 decoration-4'>
-              All
-            </li>
-            <li className='text-lg font-semibold mr-6 hover:underline hover:underline-offset-8 decoration-4'>
-              Culture
-            </li>
-            <li className='text-lg font-semibold mr-6 hover:underline hover:underline-offset-8 decoration-4'>
-              Ideas
-            </li>
-            <li className='text-lg font-semibold mr-6 hover:underline hover:underline-offset-8 decoration-4'>
-              Technology
-            </li>
-          </ul>
-        </div>
-        <div onClick={handleMenu} className='space-y-2 hover:cursor-pointer sm:hidden'>
-          <div className='w-7 h-px bg-white'></div>
-          <div className='w-7 h-px bg-white'></div>
-          <div className='w-7 h-px bg-white'></div>
+    <header className='bg-main-dark'>
+      <nav className='h-20 flex flex-row justify-between items-center mx-10'>
+        <Link
+          to='/'
+          className='text-white text-lg font-semibold hover:underline hover:underline-offset-8 decoration-2'>
+          Personal Blog
+        </Link>
+        <ul className='hidden md:flex space-x-6 text-white text-lg font-semibold decoration-4'>
+          <li className='hover:underline hover:underline-offset-8'>
+            <NavLink to='/all'>All</NavLink>
+          </li>
+          <li className='hover:underline hover:underline-offset-8'>
+            <NavLink to='/culture'>Culture</NavLink>
+          </li>
+          <li className='hover:underline hover:underline-offset-8'>
+            <NavLink to='/ideas'>Ideas</NavLink>
+          </li>
+          <li className='hover:underline hover:underline-offset-8'>
+            <NavLink to='/tech'>Technology</NavLink>
+          </li>
+        </ul>
+        <div onClick={() => setOpenNav(!openNav)} className='space-y-2 hover:cursor-pointer'>
+          {openNav ? <CloseMenu /> : <OpenMenu />}
         </div>
       </nav>
-      <MobileMenu handler={handleMenu} hasOpen={openMenu} />
     </header>
   );
 };
